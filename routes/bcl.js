@@ -109,7 +109,7 @@ function makeGeoJson(result){
     feature.geometry = JSON.parse(result.rows[i].geojson);
     //for(j=0;j<result.rows[i].length;j++){
 
-      feature.properties = {"CNT":result.rows[i],
+      feature.properties = {"CNT":result.rows[i].length,
                             "NAME":result.rows[i].name,
                             "ID":result.rows[i].ogc_fid,
                             "NUMBER":result.rows[i].rte_no,
