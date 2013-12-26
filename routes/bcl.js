@@ -111,7 +111,7 @@ function makeGeoJson(result){
 
     for (k in theRow){
       if(k  !=  'geojson' ){
-        feature.properties.[k]=theRow(k);
+        feature.properties[k]=theRow(k);
       }
     }  
 
