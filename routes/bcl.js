@@ -107,19 +107,14 @@ function makeGeoJson(result){
   for(i=0; i<result.rows.length; i++){
     var feature = new Feature();
     feature.geometry = JSON.parse(result.rows[i].geojson);
-    //for(j=0;j<result.rows[i].length;j++){
-    var t = 0
-    for (r in result.rows[i])
-    {
-      t=t+1
+    theRow = result.rows[i];
+
+    for (k in theRow){
+      if(k  <>  'geojson' ){
+        feature.properties.push(k,theRow(k));
+      }
     }  
-      feature.properties = {"CNT":t,
-                            "NAME":result.rows[i].name,
-                            "ID":result.rows[i].ogc_fid,
-                            "NUMBER":result.rows[i].rte_no,
-                            "TYPE":result.rows[i].rte_type,
-                            "MILES":result.rows[i].gis_miles,
-                            "SOURCE":result.rows[i].datasource};
+
     //}
     featureCollection.features.push(feature);
   }  
