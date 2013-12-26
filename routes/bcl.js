@@ -110,7 +110,7 @@ function makeGeoJson(result){
     theRow = result.rows[i];
 
     for (k in theRow){
-      if(k  <>  'geojson' ){
+      if(k  !=  'geojson' ){
         feature.properties.push(k,theRow(k));
       }
     }  
