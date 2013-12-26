@@ -113,7 +113,7 @@ function makeGeoJson(result){
     {
       t=t+1
     }  
-      feature.properties = {"CNT":result.rows[i].length,
+      feature.properties = {"CNT":t,
                             "NAME":result.rows[i].name,
                             "ID":result.rows[i].ogc_fid,
                             "NUMBER":result.rows[i].rte_no,
