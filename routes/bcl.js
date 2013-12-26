@@ -54,8 +54,6 @@ exports.trail = function(req, res) {
     var query = client.query("select st_asgeojson(the_geom) as geojson,ogc_fid,rte_no,rte_type,name,gis_miles,datasource from yonder_trails where rte_no = " + idformat.toString() + ";"); 
     var retval = "no data";
     query.on('row', function(row,result) {
-        //console.log(result);
-        //client.end();
         result.addRow(row);
         if (!result) {
           return res.send('No data found');
@@ -64,8 +62,6 @@ exports.trail = function(req, res) {
         }
       }); 
     query.on("end", function (result) {
-
-        console.log(JSON.stringify(result.rows, null, "    "));
         featureCollection = makeGeoJson(result);
         res.send(featureCollection);
         client.end();
@@ -73,7 +69,6 @@ exports.trail = function(req, res) {
   };
 
 exports.trailSegment = function(req, res) {
-    //TODO: Flesh this out. Logic will be similar to bounding box.
     var client = new pg.Client(conString);
     client.connect();
     var crsobj = {"type": "name","properties": {"name": "urn:ogc:def:crs:EPSG:6.3:4326"}};
@@ -82,8 +77,6 @@ exports.trailSegment = function(req, res) {
     var query = client.query("select st_asgeojson(the_geom) as geojson,ogc_fid,rte_no,rte_type,name,gis_miles,datasource from yonder_trails where ogc_fid = " + idformat + ";"); 
     var retval = "no data";
     query.on('row', function(row,result) {
-        //console.log(result);
-        //client.end();
         result.addRow(row);
         if (!result) {
           return res.send('No data found');
@@ -92,8 +85,6 @@ exports.trailSegment = function(req, res) {
         }
       }); 
     query.on("end", function (result) {
-
-        console.log(JSON.stringify(result.rows, null, "    "));
         featureCollection = makeGeoJson(result);
         res.send(featureCollection);
         client.end();
@@ -116,12 +107,16 @@ function makeGeoJson(result){
   for(i=0; i<result.rows.length; i++){
     var feature = new Feature();
     feature.geometry = JSON.parse(result.rows[i].geojson);
-    feature.properties = {"NAME":result.rows[i].name,
-                          "ID":result.rows[i].ogc_fid,
-                          "NUMBER":result.rows[i].rte_no,
-                          "TYPE":result.rows[i].rte_type,
-                          "MILES":result.rows[i].gis_miles,
-                          "SOURCE":result.rows[i].datasource};
+    //for(j=0;j<result.rows[i].length;j++){
+
+      feature.properties = {"CNT":result.rows[i],
+                            "NAME":result.rows[i].name,
+                            "ID":result.rows[i].ogc_fid,
+                            "NUMBER":result.rows[i].rte_no,
+                            "TYPE":result.rows[i].rte_type,
+                            "MILES":result.rows[i].gis_miles,
+                            "SOURCE":result.rows[i].datasource};
+    //}
     featureCollection.features.push(feature);
   }  
   return featureCollection
