@@ -80,7 +80,6 @@ exports.trailSegment = function(req, res) {
     var idformat = "'" + req.params.id + "'";
     idformat = idformat.toUpperCase();  
     var query = client.query("select st_asgeojson(the_geom) as geojson geojson,ogc_fid,rte_no,rte_type,name,gis_miles,datasource from yonder_trails where ogc_fid = " + idformat + ";"); 
-    var query = client.query("select st_asgeojson(the_geom) as  from yonder_trails where ogc_fid = " + idformat + ";"); 
     var retval = "no data";
     query.on('row', function(row,result) {
         //console.log(result);
