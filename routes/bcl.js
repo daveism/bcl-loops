@@ -108,8 +108,12 @@ function makeGeoJson(result){
     var feature = new Feature();
     feature.geometry = JSON.parse(result.rows[i].geojson);
     //for(j=0;j<result.rows[i].length;j++){
-
-      feature.properties = {"CNT":result.rows[i],
+    var t = 0
+    for (r in result.rows[i])
+    {
+      t=t+1
+    }  
+      feature.properties = {"CNT":result.rows[i].length,
                             "NAME":result.rows[i].name,
                             "ID":result.rows[i].ogc_fid,
                             "NUMBER":result.rows[i].rte_no,
