@@ -60,7 +60,11 @@ exports.getLoop = function(req, res) {
 
     query.on('error', function(err){
       if(err) {
-        return console.error('error running query', err);
+        console.error('error running query', err);
+        client.end();
+        featureCollection = makeGeoJson(err);
+        res.send(featureCollection);
+        client.end(); 
       }
     });
 
