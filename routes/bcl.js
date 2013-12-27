@@ -86,7 +86,7 @@ exports.getLoop = function(req, res) {
       } else {      
 
 
-        res.json(200,featureCollection);
+        res.jsonp(200,featureCollection);
         client.end();
       }
     });
