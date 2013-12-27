@@ -63,22 +63,17 @@ exports.getLoop = function(req, res) {
         console.error('error running query', err);
         res.setHeader('Content-Type', 'application/json');
         return res.send(err);
-        client.end(); 
-      }else{
-        query.on('row', function(row,result,err) {
-
-
-            result.addRow(row);
-            if (!result) {
-              return res.send('No data found');
-            } else {
-              res.setHeader('Content-Type', 'application/json');
-            }
-          });         
       }
     });
 
-
+    query.on('row', function(row,result,err) 
+        result.addRow(row);
+        if (!result) {
+          return res.send('No data found');
+        } else {
+          res.setHeader('Content-Type', 'application/json');
+        }
+      }); 
 
     query.on("end", function (result) {
         featureCollection = makeGeoJson(result);
@@ -148,6 +143,7 @@ function Feature(){
 } 
 
 function makeGeoJson(result){
+  if 
   var featureCollection = new FeatureCollection();
   for(i=0; i<result.rows.length; i++){
     var feature = new Feature();
