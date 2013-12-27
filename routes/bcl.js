@@ -63,10 +63,14 @@ exports.getLoop = function(req, res) {
         console.error('error running query', err);
         res.setHeader('Content-Type', 'application/json');
         return res.send(err);
+        client.end(); 
+        return 
       }
     });
 
-    query.on('row', function(row,result) 
+    query.on('row', function(row,result,err) {
+
+
         result.addRow(row);
         if (!result) {
           return res.send('No data found');
@@ -76,13 +80,9 @@ exports.getLoop = function(req, res) {
       }); 
 
     query.on("end", function (result) {
-        if(!result){
-          return console.log('No data found');
-        }else{
-          featureCollection = makeGeoJson(result);
-          res.send(featureCollection);
-          client.end();
-        }
+        featureCollection = makeGeoJson(result);
+        res.send(featureCollection);
+        client.end();
     });
 
   };
@@ -147,7 +147,6 @@ function Feature(){
 } 
 
 function makeGeoJson(result){
-  
   var featureCollection = new FeatureCollection();
   for(i=0; i<result.rows.length; i++){
     var feature = new Feature();
