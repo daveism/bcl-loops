@@ -7,8 +7,8 @@ app.get('/bcl/trail/:id/', bcl.trail);
 app.get('/bcl/trail/:id',bcl.trail);
 app.get('/bcl/trailsegment/:id/',bcl.trailSegment);
 app.get('/bcl/trailsegment/:id',bcl.trailSegment); 
-//app.get('/bcl/loop/:nodeid/:distance',bcl.getLoop);
-//app.get('/bcl/loop/:nodeid/:distance/',bcl.getLoop);
+app.get('/bcl/loop/:nodeid/:distance',bcl.getLoop);
+app.get('/bcl/loop/:nodeid/:distance/',bcl.getLoop);
 
 app.listen(3000);
 console.log('Listening on port 3000');
