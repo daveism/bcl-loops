@@ -58,11 +58,12 @@ exports.getLoop = function(req, res) {
 
     var retval = "no data";
 
-    query.on('error', function(err)){
+    query.on('error', function(err){
       if(err) {
         return console.error('error running query', err);
       }
-    }
+    });
+
     query.on('row', function(row,result,err) {
 
 
@@ -73,11 +74,13 @@ exports.getLoop = function(req, res) {
           res.setHeader('Content-Type', 'application/json');
         }
       }); 
+
     query.on("end", function (result) {
         featureCollection = makeGeoJson(result);
         res.send(featureCollection);
         client.end();
     });
+
   };
 
 
