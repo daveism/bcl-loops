@@ -75,7 +75,8 @@ exports.getLoop = function(req, res) {
         if (!result) {
           return res.send('No data found');
         } else {
-          res.setHeader('Content-Type', 'application/json');
+          //res.setHeader('Content-Type', 'application/json');
+          res.writeHead(200, { 'Content-Type': 'application/json' }); 
         }
       }); 
 
