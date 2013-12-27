@@ -61,8 +61,8 @@ exports.getLoop = function(req, res) {
     query.on('error', function(err){
       if(err) {
         console.error('error running query', err);
-        res.setHeader('Content-Type', 'application/json');
-        return res.json(500, { error: 'error with loop' })
+        //es.setHeader('Content-Type', 'application/json');
+        res.json(500, { error: 'error with loop' })
         client.end(); 
         return 
       }
