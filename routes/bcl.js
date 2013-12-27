@@ -66,7 +66,7 @@ exports.getLoop = function(req, res) {
       }
     });
 
-    query.on('row', function(row,result,err) 
+    query.on('row', function(row,result) 
         result.addRow(row);
         if (!result) {
           return res.send('No data found');
@@ -77,6 +77,7 @@ exports.getLoop = function(req, res) {
 
     query.on("end", function (result) {
         if(!result){
+          return console.log('No data found');
         }else{
           featureCollection = makeGeoJson(result);
           res.send(featureCollection);
