@@ -80,9 +80,13 @@ exports.getLoop = function(req, res) {
       }); 
 
     query.on("end", function (result) {
+      if (!result) {
+        return res.send('No data found');
+      } else {      
         featureCollection = makeGeoJson(result);
         res.send(featureCollection);
         client.end();
+      }
     });
 
   };
