@@ -44,8 +44,7 @@ exports.bboxSrid = function(req, res) {
       }); 
 };
 
-exports.loop = function(req, res) {
-    //TODO: Flesh this out. Logic will be similar to bounding box.
+exports.getLoop = function(req, res) {
     var client = new pg.Client(conString);
     client.connect();
     var crsobj = {"type": "name","properties": {"name": "urn:ogc:def:crs:EPSG:6.3:4326"}};
