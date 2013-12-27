@@ -17,7 +17,7 @@ exports.bbox = function(req, res) {
           return res.send('No data found');
         } else {
           res.setHeader('Content-Type', 'application/json');
-          res.send({type: "feature",crs: crsobj, geometry: JSON.parse(result.geojson), properties:{"iso": req.params.id, "representation": "extent"}});
+          res.json({type: "feature",crs: crsobj, geometry: JSON.parse(result.geojson), properties:{"iso": req.params.id, "representation": "extent"}});
         }
       }); 
     
@@ -39,7 +39,7 @@ exports.bboxSrid = function(req, res) {
           return res.send('No data found');
         } else {
           res.setHeader('Content-Type', 'application/json');
-          res.send({type: "feature",crs: crsobj, geometry: JSON.parse(result.geojson), properties:{"iso": req.params.id, "representation": "extent"}});
+          res.json({type: "feature",crs: crsobj, geometry: JSON.parse(result.geojson), properties:{"iso": req.params.id, "representation": "extent"}});
         }
       }); 
 };
@@ -86,7 +86,7 @@ exports.getLoop = function(req, res) {
       } else {      
         featureCollection = makeGeoJson(result);
         res.send(featureCollection);
-        client.end();
+        client.json();
       }
     });
 
@@ -112,7 +112,7 @@ exports.trail = function(req, res) {
       }); 
     query.on("end", function (result) {
         featureCollection = makeGeoJson(result);
-        res.send(featureCollection);
+        res.json(featureCollection);
         client.end();
     });
   };
@@ -135,7 +135,7 @@ exports.trailSegment = function(req, res) {
       }); 
     query.on("end", function (result) {
         featureCollection = makeGeoJson(result);
-        res.send(featureCollection);
+        res.json(featureCollection);
         client.end();
     });
   };
