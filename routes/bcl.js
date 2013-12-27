@@ -113,7 +113,7 @@ exports.trail = function(req, res) {
       }); 
     query.on("end", function (result) {
         featureCollection = makeGeoJson(result);
-        res.jsonp(featureCollection);
+        res.json(featureCollection);
         client.end();
     });
   };
