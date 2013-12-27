@@ -61,8 +61,11 @@ exports.getLoop = function(req, res) {
     query.on('error', function(err){
       if(err) {
         console.error('error running query', err);
-        res.send(err);
+        res.setHeader('Content-Type', 'application/json');
+        return res.send(err);
         client.end(); 
+      }else{
+        
       }
     });
 
