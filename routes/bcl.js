@@ -107,7 +107,7 @@ exports.trail = function(req, res) {
         if (!result) {
           return res.send('No data found');
         } else {
-          res.setHeader('Content-Type', 'application/json');
+          //res.setHeader('Content-Type', 'application/json');
         }
       }); 
     query.on("end", function (result) {
