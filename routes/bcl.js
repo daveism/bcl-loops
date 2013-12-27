@@ -86,7 +86,7 @@ exports.getLoop = function(req, res) {
       } else {      
         featureCollection = makeGeoJson(result);
         res.json(featureCollection);
-        client.json();
+        client.end();
       }
     });
 
@@ -135,9 +135,7 @@ exports.trailSegment = function(req, res) {
       }); 
     query.on("end", function (result) {
         featureCollection = makeGeoJson(result);
-        var json = JSON.stringify(featureCollection);
-        var newMyClass = JSON.parse(json);
-        res.json(newMyClass);
+        res.json(featureCollection);
         client.end();
     });
   };
