@@ -84,8 +84,9 @@ exports.getLoop = function(req, res) {
          console.log('No data found');
          return
       } else {      
-        featureCollection = makeGeoJson(result);
-        res.json(featureCollection);
+
+
+        res.json(200,featureCollection);
         client.end();
       }
     });
@@ -112,7 +113,7 @@ exports.trail = function(req, res) {
       }); 
     query.on("end", function (result) {
         featureCollection = makeGeoJson(result);
-        res.json(featureCollection);
+        res.jsonp(featureCollection);
         client.end();
     });
   };
