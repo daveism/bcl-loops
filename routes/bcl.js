@@ -58,6 +58,11 @@ exports.getLoop = function(req, res) {
 
     var retval = "no data";
     query.on('row', function(row,result) {
+
+        if(err) {
+          return console.error('error running query', err);
+        }
+
         result.addRow(row);
         if (!result) {
           return res.send('No data found');
