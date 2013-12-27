@@ -85,7 +85,7 @@ exports.getLoop = function(req, res) {
          return
       } else {      
         featureCollection = makeGeoJson(result);
-        res.json(JSON.stringify(featureCollection);
+        res.json(JSON.stringify(featureCollection));
         client.json();
       }
     });
