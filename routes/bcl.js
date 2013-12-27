@@ -44,6 +44,35 @@ exports.bboxSrid = function(req, res) {
       }); 
 };
 
+exports.loop = function(req, res) {
+    //TODO: Flesh this out. Logic will be similar to bounding box.
+    var client = new pg.Client(conString);
+    client.connect();
+    var crsobj = {"type": "name","properties": {"name": "urn:ogc:def:crs:EPSG:6.3:4326"}};
+    var nodeformat = "'TR" + req.params.nodeid + "'";
+    var distanceformat = "'TR" + req.params.distance + "'";
+
+    nodeformat = nodeformat.toUpperCase(); 
+    distanceformat = distanceformat.toUpperCase(); 
+
+    var query = client.query("select st_asgeojson(the_geom) as geojson,seq,pass,node,edge,cost,end_node from yonder_getloops(" + nodeformat.toString() + "," + distanceformat.toString() + ")")
+    var retval = "no data";
+    query.on('row', function(row,result) {
+        result.addRow(row);
+        if (!result) {
+          return res.send('No data found');
+        } else {
+          res.setHeader('Content-Type', 'application/json');
+        }
+      }); 
+    query.on("end", function (result) {
+        featureCollection = makeGeoJson(result);
+        res.send(featureCollection);
+        client.end();
+    });
+  };
+
+
 exports.trail = function(req, res) {
     //TODO: Flesh this out. Logic will be similar to bounding box.
     var client = new pg.Client(conString);
