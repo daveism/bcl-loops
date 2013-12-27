@@ -57,11 +57,14 @@ exports.getLoop = function(req, res) {
     var query = client.query("select st_asgeojson(the_geom) as geojson,seq,pass,node,edge,cost,end_node from yonder_getloops(" + nodeformat.toString() + "," + distanceformat.toString() + ")")
 
     var retval = "no data";
+
+    query.on('error', function(err)){
+      if(err) {
+        return console.error('error running query', err);
+      }
+    }
     query.on('row', function(row,result,err) {
 
-        if(err) {
-          return console.error('error running query', err);
-        }
 
         result.addRow(row);
         if (!result) {
