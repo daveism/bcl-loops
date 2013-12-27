@@ -81,7 +81,8 @@ exports.getLoop = function(req, res) {
 
     query.on("end", function (result) {
       if (!result) {
-        return res.send('No data found');
+         console.log('No data found');
+         return
       } else {      
         featureCollection = makeGeoJson(result);
         res.send(featureCollection);
