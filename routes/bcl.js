@@ -48,8 +48,8 @@ exports.getLoop = function(req, res) {
     var client = new pg.Client(conString);
     client.connect();
     var crsobj = {"type": "name","properties": {"name": "urn:ogc:def:crs:EPSG:6.3:4326"}};
-    var nodeformat = "'TR" + req.params.nodeid + "'";
-    var distanceformat = "'TR" + req.params.distance + "'";
+    var nodeformat = "'" + req.params.nodeid + "'";
+    var distanceformat = "'" + req.params.distance + "'";
 
     nodeformat = nodeformat.toUpperCase(); 
     distanceformat = distanceformat.toUpperCase(); 
