@@ -76,9 +76,12 @@ exports.getLoop = function(req, res) {
       }); 
 
     query.on("end", function (result) {
-        featureCollection = makeGeoJson(result);
-        res.send(featureCollection);
-        client.end();
+        if(!result){
+        }else{
+          featureCollection = makeGeoJson(result);
+          res.send(featureCollection);
+          client.end();
+        }
     });
 
   };
@@ -143,7 +146,7 @@ function Feature(){
 } 
 
 function makeGeoJson(result){
-  if 
+  
   var featureCollection = new FeatureCollection();
   for(i=0; i<result.rows.length; i++){
     var feature = new Feature();
