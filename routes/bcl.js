@@ -135,7 +135,9 @@ exports.trailSegment = function(req, res) {
       }); 
     query.on("end", function (result) {
         featureCollection = makeGeoJson(result);
-        res.json(featureCollection);
+        var json = JSON.stringify(featureCollection);
+        var newMyClass = JSON.parse(json);
+        res.json(newMyClass);
         client.end();
     });
   };
