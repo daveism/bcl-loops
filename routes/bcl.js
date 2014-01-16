@@ -54,7 +54,7 @@ exports.getLoop = function(req, res) {
     nodeformat = nodeformat.toUpperCase(); 
     distanceformat = distanceformat.toUpperCase(); 
     
-    var query = client.query("select st_asgeojson(the_geom) as geojson,seq,pass,node,edge,cost,end_node from yonder_getloop(" + nodeformat.toString() + "," + distanceformat.toString() + ")")
+    var query = client.query("select st_asgeojson(the_geom) as geojson,seq,pass,node,edge,cost,end_node,totalcost,loopid,segment_name from yonder_getloop(" + nodeformat.toString() + "," + distanceformat.toString() + ")")
 
     var retval = "no data";
 
