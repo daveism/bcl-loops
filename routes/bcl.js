@@ -1,5 +1,5 @@
 var pg = require('pg');
-var conString = "postgres://postgres@192.168.1.103:5432/yonder_trails";  //local install no pwd needed
+var conString = "postgres://postgres@54.144.65.62:5432/yonder_trails";  //local install no pwd needed
 
 exports.bbox = function(req, res) {
     var client = new pg.Client(conString);
